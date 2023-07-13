@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { IDogResponse } from "../models/dog-model";
+import { ProgressSpinner } from "primereact/progressspinner";
 import { DogService } from "../services/dog-service";
 
 export const Dog = () => {
@@ -25,7 +26,7 @@ export const Dog = () => {
 
   return (
     <>
-      {loading && <p>Loading...</p>}
+      {loading && <ProgressSpinner />}
       {!loading && dog && (
         <>
           <h1>Dog List</h1>
