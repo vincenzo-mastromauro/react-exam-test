@@ -1,27 +1,42 @@
-import axios from "axios";
+import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { handleApiError } from "./error-handler";
 
 export abstract class BaseService {
-  private axiosInstance = axios.create({
-    baseURL: "https://pokeapi.co/api/v2/",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    timeout: 10000,
-  });
+  private axiosInstance: AxiosInstance;
+  private axiosInstanceDog: AxiosInstance;
 
-  protected async get<T>(endpoint: string): Promise<T> {
+  constructor() {
+    this.axiosInstance = axios.create({
+      baseURL: "https://pokeapi.co/api/v2/",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      timeout: 10000,
+    });
+
+    this.axiosInstanceDog = axios.create({
+      baseURL: "https://dog.ceo/api/",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      timeout: 10000,
+    });
+  }
+
+  protected async get<T>(endpoint: string, endpointID: number): Promise<T> {
     try {
-      const response = await this.axiosInstance.get<T>(endpoint);
+      const axiosInstance = endpointID === 1 ? this.axiosInstanceDog : this.axiosInstance;
+      const response: AxiosResponse<T> = await axiosInstance.get(endpoint);
       return response.data;
     } catch (error: any) {
       handleApiError(error);
       throw error;
     }
   }
+
   protected async post<T>(endpoint: string, data: any): Promise<T> {
     try {
-      const response = await this.axiosInstance.post<T>(endpoint, data);
+      const response: AxiosResponse<T> = await this.axiosInstance.post(endpoint, data);
       return response.data;
     } catch (error: any) {
       handleApiError(error);

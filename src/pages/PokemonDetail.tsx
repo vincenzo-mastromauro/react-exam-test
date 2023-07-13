@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IPokemonDetail } from "../models/pokemon-model";
 import { PokemonService } from "../services/pokemon-service";

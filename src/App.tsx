@@ -6,6 +6,8 @@ import Berries from "./pages/Berries";
 import "primeflex/primeflex.css";
 import "primereact/resources/themes/tailwind-light/theme.css";
 import "primereact/resources/primereact.min.css";
+import Navbar from "./components/Navbar";
+import { Dog } from "./pages/Dog";
 
 function App() {
   return (
@@ -14,21 +16,32 @@ function App() {
         {(primeReact) => {
           console.log(primeReact);
           return (
-            <RouterProvider
-              router={createBrowserRouter([
-                {
-                  path: "/",
-                  element: <PokemonList />,
-                },
-                {
-                  path: "/:pokemonName",
-                  element: <PokemonDetail />,
-                },
-                {
-                  path: "/berries",
-                  element: <Berries />,
-                },
-              ])}></RouterProvider>
+            <>
+              <Navbar />
+              <RouterProvider
+                router={createBrowserRouter([
+                  {
+                    path: "/",
+                    element: <PokemonList />,
+                  },
+                  {
+                    path: "/:pokemonName",
+                    element: <PokemonDetail />,
+                  },
+                  {
+                    path: "/berries",
+                    element: <Berries />,
+                  },
+                  {
+                    path: "/test/dog",
+                    element: <Dog />,
+                  },
+                  {
+                    path: "*",
+                    element: <h1>404 Not Found</h1>,
+                  },
+                ])}></RouterProvider>
+            </>
           );
         }}
       </PrimeReactContext.Consumer>

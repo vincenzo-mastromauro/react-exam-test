@@ -7,6 +7,6 @@ export class BerryService extends BaseService {
     const timerId = `getBerries ${endpoint}`;
     console.time(timerId);
     console.timeEnd(timerId);
-    return await this.get<IBerriesResponse>(endpoint + "?limit=1000");
+    return await this.get<IBerriesResponse>(endpoint + "?limit=1000", 0);
   }
 }

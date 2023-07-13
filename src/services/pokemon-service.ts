@@ -4,17 +4,17 @@ import { IPokemonResponse } from "../models/pokemon-model";
 export class PokemonService extends BaseService {
   async getPokemons(): Promise<IPokemonResponse> {
     const endpoint = "pokemon";
-    const timerId = `getPokemons ${endpoint}`;
-    console.time(timerId);
-    console.timeEnd(timerId);
-    return await this.get<IPokemonResponse>(endpoint + "?limit=1000");
+    console.time(`getPokemons ${endpoint}`);
+    const response = await this.get<IPokemonResponse>(`${endpoint}?limit=1000`, 0);
+    console.timeEnd(`getPokemons ${endpoint}`);
+    return response;
   }
 
   async getSinglePokemon(pokemonName: string | "ditto"): Promise<IPokemonResponse> {
-    const endpoint = "pokemon/";
-    const timerId = `getSinglePokemon ${endpoint}${pokemonName}`;
-    console.time(timerId);
-    console.timeEnd(timerId);
-    return await this.get<IPokemonResponse>(endpoint + pokemonName);
+    const endpoint = `pokemon/${pokemonName}`;
+    console.time(`getSinglePokemon ${endpoint}`);
+    const response = await this.get<IPokemonResponse>(endpoint, 0);
+    console.timeEnd(`getSinglePokemon ${endpoint}`);
+    return response;
   }
 }
