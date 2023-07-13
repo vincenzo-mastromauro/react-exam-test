@@ -2,19 +2,30 @@ import axios from "axios";
 import { handleApiError } from "./error-handler";
 
 export abstract class BaseService {
-  constructor() {
-    axios.defaults.baseURL = "https://pokeapi.co/api/v2/";
-    axios.defaults.headers.common["Content-Type"] = "application/json";
-    axios.defaults.timeout = 10000;
-  }
+  private axiosInstance = axios.create({
+    baseURL: "https://pokeapi.co/api/v2/",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    timeout: 10000,
+  });
 
   protected async get<T>(endpoint: string): Promise<T> {
     try {
-      const response = await axios.get<T>(axios.defaults.baseURL + endpoint);
+      const response = await this.axiosInstance.get<T>(endpoint);
       return response.data;
     } catch (error: any) {
       handleApiError(error);
+      throw error;
     }
-    return {} as T;
+  }
+  protected async post<T>(endpoint: string, data: any): Promise<T> {
+    try {
+      const response = await this.axiosInstance.post<T>(endpoint, data);
+      return response.data;
+    } catch (error: any) {
+      handleApiError(error);
+      throw error;
+    }
   }
 }
