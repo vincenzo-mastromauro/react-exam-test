@@ -34,7 +34,7 @@ projectname with tree structure
 
 ## **Author**
 
-- **Vincenzo Mastromauro** - vincenzo.mastromauro@edu.itspiemonte.it
+- **Vincenzo Mastromauro** - <vincenzo.mastromauro@edu.itspiemonte.it>
   - Role: Developer
 
 ## **Changelog and version history**
