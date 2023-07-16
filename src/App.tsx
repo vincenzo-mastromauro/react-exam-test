@@ -1,5 +1,5 @@
 import { PrimeReactProvider, PrimeReactContext } from "primereact/api";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import PokemonList from "./pages/PokemonList";
 import PokemonDetail from "./pages/PokemonDetail";
 import Berries from "./pages/Berries";
@@ -38,7 +38,7 @@ function App() {
                   },
                   {
                     path: "*",
-                    element: <h1>404 Not Found</h1>,
+                    element: <Navigate to='/' />,
                   },
                 ])}></RouterProvider>
             </>
